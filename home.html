@@ -1,0 +1,112 @@
+<DOCTYPE HTML>
+<head>
+<!--
+
+Trying out JQ widgets, a framework for JQuery. I am trying to learn how to create graphs and 
+charts to represent data with this framwork
+ original documentation 
+ 
+ http://www.jqwidgets.com/jquery-widgets-documentation/
+ -->
+<link src= "jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
+	<script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script> 
+	<script type="text/javascript" src="jqwidgets/jqxgrid.columnsresize.js"></script> 
+	<script type="text/javascript" src="jqwidgets/jqxgrid.filter.js"></script> 
+	<script type="text/javascript" src="jqwidgets/jqxgrid.sort.js"></script> 
+	<script type="text/javascript" src="jqwidgets/jqxgrid.pager.js"></script> 
+	<script type="text/javascript" src="jqwidgets/jqxgrid.grouping.js"></script> 
+	<script>
+    $(document).ready(function () {
+            
+            var data = new Array();
+            var Class =
+            [
+                "Art", "History", "Math", "Science", "Social Studies", "English", "Reading"
+            ];
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+            var numStudents =
+            [
+                "20", "50", "30", "1000", "80", "900", "300"
+            ];
+            var priceValues =
+            [
+                "100", "200.5", "300.0", "3450", "200", "39"
+            ];
+            for (var i = 0; i < 7; i++) {
+                var row = {};
+                
+                row["Class"] = Class[i];
+                row["lastNames"] = lastNames[i]
+                row["numStudents"] = numStudents[i];
+                row["priceValues"] = priceValues[i];
+                
+                data[i] = row;
+            }
+            var source =
+            {
+                localdata: data,
+                datatype: "array"
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }      
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                source: dataAdapter,
+                columns: [
+                  { text: 'Class Name', datafield: 'Class', width: 100 },
+                  { text: 'Teacher Name', datafield: 'lastNames', width: 100 },
+                  { text: 'number Students', datafield: 'numStudents', width: 180 },
+                  { text: 'Book Price', datafield: 'priceValues', width: 80, cellsalign: 'right' }
+                  
+                ]
+            });
+        });
+        
+        /* 
+        Couldn't get the grid to load up. I tried with this local data and also tried through ajax. Keep getting errors, tried 
+        http://www.jqwidgets.com/community/topic/uncaught-typeerror-cannot-read-property-jqx-of-undefined/
+        to help me solve those errors as well as 
+        http://www.jqwidgets.com/community/topic/uncaught-typeerror-cannot-read-property-dataadapter-of-undefined-2/
+        
+        Also, with the AJAX/JSON upload I tried these resources for help. 
+        http://www.jqwidgets.com/binding-jquery-grid-to-json-data/
+        http://www.jqwidgets.com/community/topic/binding-json-data-to-jqxgrid/
+        */
+    </script>
+    
+    
+    
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myButton").jqxButton({ width: '120px', height: '35px'});
+        });
+    </script>
+	
+    <input type="button" value="Click Me" id='myButton'/>
+
+
+
+<div id="jqxgrid">
+
+
+
+
+
+</div>
+
+
+</body>
+
+</html>
